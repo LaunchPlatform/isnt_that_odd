@@ -50,6 +50,7 @@ packages = ["src/isnt_that_odd"]
 
 [project.scripts]
 isnt-that-odd = "isnt_that_odd.cli:cli"
+isnt_that_odd = "isnt_that_odd.cli:cli"
 
 [tool.black]
 line-length = 88
