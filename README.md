@@ -1,5 +1,7 @@
 # isn't that odd
 
+[![CI](https://github.com/LaunchPlatform/isnt_that_odd/actions/workflows/ci.yml/badge.svg)](https://github.com/LaunchPlatform/isnt_that_odd/actions/workflows/ci.yml)
+
 A Python library that determines if a given number is even or not by sending prompts to LLM APIs. Built with LiteLLM for universal LLM support and structured output for reliable responses.
 
 **Proudly built by vibe coding 🚀**
@@ -15,14 +17,38 @@ A Python library that determines if a given number is even or not by sending pro
 
 ## Installation
 
+### From PyPI with pip
+
+```bash
+pip install isnt_that_odd
+```
+
 ### Using uv (Recommended)
 
 ```bash
 # Install uv if you haven't already
 pip install uv
 
+# Install the package
+uv pip install isnt_that_odd
+```
+
+### Using uvx (Run without installation)
+
+```bash
+# Install uv if you haven't already
+pip install uv
+
+# Run CLI commands directly without installing
+uvx isnt_that_odd check 42
+uvx isnt_that_odd benchmark --count 10
+```
+
+### Development Installation
+
+```bash
 # Clone the repository
-git clone https://github.com/yourusername/isnt_that_odd.git
+git clone https://github.com/LaunchPlatform/isnt_that_odd.git
 cd isnt_that_odd
 
 # Install dependencies

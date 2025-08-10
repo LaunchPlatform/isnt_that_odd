@@ -41,9 +41,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/isnt_that_odd"
-Repository = "https://github.com/yourusername/isnt_that_odd.git"
-Issues = "https://github.com/yourusername/isnt_that_odd/issues"
+Homepage = "https://github.com/LaunchPlatform/isnt_that_odd"
+Repository = "https://github.com/LaunchPlatform/isnt_that_odd.git"
+Issues = "https://github.com/LaunchPlatform/isnt_that_odd/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/isnt_that_odd"]
