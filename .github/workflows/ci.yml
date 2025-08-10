@@ -18,6 +18,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install promptfoo
+      run: npm install -g promptfoo
+    
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
@@ -36,6 +45,10 @@ jobs:
       run: |
         uv run pytest --cov=src/isnt_that_odd --cov-report=xml
     
+    - name: Run promptfoo tests
+      run: |
+        promptfoo eval --config promptfoo.yaml
+    
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -47,6 +60,15 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install promptfoo
+      run: npm install -g promptfoo
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -66,6 +88,10 @@ jobs:
       run: |
         uv run ruff check src/ tests/
         uv run mypy src/
+    
+    - name: Run promptfoo lint
+      run: |
+        promptfoo lint --config promptfoo.yaml
     
   build:
     runs-on: ubuntu-latest

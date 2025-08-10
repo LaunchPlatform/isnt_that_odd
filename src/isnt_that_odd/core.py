@@ -1,4 +1,5 @@
 """Core functionality for determining if numbers are even using LLM APIs."""
+
 from typing import Optional
 from typing import Union
 
@@ -42,7 +43,20 @@ class EvenChecker:
         Returns:
             A formatted prompt string
         """
-        return f"""You are a mathematical assistant. Your task is to determine if the given number is even or odd.
+        import os
+        from pathlib import Path
+
+        # Get the directory where this module is located
+        current_dir = Path(__file__).parent
+        prompt_file = current_dir / "prompts" / "even_odd.txt"
+
+        try:
+            with open(prompt_file, "r", encoding="utf-8") as f:
+                prompt_template = f.read()
+            return prompt_template.format(number=number)
+        except FileNotFoundError:
+            # Fallback to hardcoded prompt if file not found
+            return f"""You are a mathematical assistant. Your task is to determine if the given number is even or odd.
 
 Number: {number}
 
