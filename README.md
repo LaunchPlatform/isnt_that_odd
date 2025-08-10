@@ -2,6 +2,8 @@
 
 A Python library that determines if a given number is even or not by sending prompts to LLM APIs. Built with LiteLLM for universal LLM support and structured output for reliable responses.
 
+**Proudly built by vibe coding 🚀**
+
 ## Features
 
 - 🤖 **LLM-Powered**: Uses Large Language Models to determine if numbers are even or odd
@@ -320,6 +322,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
+- **Proudly built by** vibe coding 🚀
 - **Inspired by** [vibesort](https://github.com/abyesilyurt/vibesort) - GPT-powered array sorting using structured output
 - Built with [LiteLLM](https://github.com/BerriAI/litellm) for universal LLM support
 - Uses [Pydantic](https://github.com/pydantic/pydantic) for data validation
