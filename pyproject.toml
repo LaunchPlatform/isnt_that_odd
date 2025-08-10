@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "isnt_that_odd"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Python library that determines if a number is even using LLM APIs"
 readme = "README.md"
 license = {file = "LICENSE"}
