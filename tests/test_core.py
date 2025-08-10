@@ -134,11 +134,43 @@ class TestEvenChecker:
         # Mock the LLM response with gibberish
         mock_response = Mock()
         mock_response.choices = [Mock()]
-        mock_response.choices[0].message.content = "Random text without even/odd info"
+        mock_response.choices[0].message.content = "Random text content"
         mock_completion.return_value = mock_response
 
         checker = EvenChecker()
         with pytest.raises(ValueError, match="Could not parse LLM response"):
+            checker.check(42)
+
+    @patch("src.isnt_that_odd.core.completion")
+    def test_check_ambiguous_response(self, mock_completion):
+        """Test handling of ambiguous responses containing both true/false or even/odd."""
+        # Mock the LLM response with ambiguous content
+        mock_response = Mock()
+        mock_response.choices = [Mock()]
+        mock_response.choices[
+            0
+        ].message.content = "The number 42 is both even and odd, true and false"
+        mock_completion.return_value = mock_response
+
+        checker = EvenChecker()
+        with pytest.raises(
+            ValueError, match="Ambiguous response with both true and false"
+        ):
+            checker.check(42)
+
+    @patch("src.isnt_that_odd.core.completion")
+    def test_check_ambiguous_response_odd_even(self, mock_completion):
+        """Test handling of ambiguous responses containing both odd and even indicators."""
+        # Mock the LLM response with ambiguous content
+        mock_response = Mock()
+        mock_response.choices = [Mock()]
+        mock_response.choices[0].message.content = "This number is odd but also even"
+        mock_completion.return_value = mock_response
+
+        checker = EvenChecker()
+        with pytest.raises(
+            ValueError, match="Ambiguous response with both true and false"
+        ):
             checker.check(42)
 
     @patch("src.isnt_that_odd.core.completion")

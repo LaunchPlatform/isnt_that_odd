@@ -96,26 +96,31 @@ Your response:"""
                 temperature=0.0,  # Deterministic output
                 max_tokens=50,
             )
-
-            # Extract the content from the response
-            content = response.choices[0].message.content
-
-            # Parse the JSON response
-            try:
-                result = EvenResponse.model_validate_json(content)
-                return result.is_even
-            except Exception as e:
-                # Fallback: try to extract boolean from text if JSON parsing fails
-                content_lower = content.lower().strip()
-                if "true" in content_lower or "even" in content_lower:
-                    return True
-                elif "false" in content_lower or "odd" in content_lower:
-                    return False
-                else:
-                    raise ValueError(f"Could not parse LLM response: {content}") from e
-
         except Exception as e:
             raise Exception(f"Error calling LLM API: {str(e)}") from e
+
+        # Extract the content from the response
+        content = response.choices[0].message.content
+
+        # Parse the JSON response
+        try:
+            result = EvenResponse.model_validate_json(content)
+            return result.is_even
+        except Exception as e:
+            # Fallback: try to extract boolean from text if JSON parsing fails
+            content_lower = content.lower().strip()
+            if ("true" in content_lower and "false" in content_lower) or (
+                "odd" in content_lower and "even" in content_lower
+            ):
+                raise ValueError(
+                    "Ambiguous response with both true and false, content: " + content
+                ) from e
+            if "true" in content_lower or "even" in content_lower:
+                return True
+            elif "false" in content_lower or "odd" in content_lower:
+                return False
+            else:
+                raise ValueError(f"Could not parse LLM response: {content}") from e
 
 
 def is_even(
