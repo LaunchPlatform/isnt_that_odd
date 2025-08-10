@@ -33,20 +33,6 @@ class EvenChecker:
         self.api_key = api_key
         self.base_url = base_url
 
-        # Set environment variables for LiteLLM if provided
-        # Using generic environment variable names to avoid provider-specific assumptions
-        if api_key:
-            import os
-
-            # Use a generic API key environment variable
-            os.environ["LITELLM_API_KEY"] = api_key
-
-        if base_url:
-            import os
-
-            # Use a generic base URL environment variable
-            os.environ["LITELLM_API_BASE"] = base_url
-
     def _create_prompt(self, number: Union[int, float, str]) -> str:
         """Create a prompt for the LLM to determine if a number is even.
 
@@ -97,6 +83,8 @@ Your response:"""
                 response_format={"type": "json_object"},
                 temperature=0.0,  # Deterministic output
                 max_tokens=50,
+                api_key=self.api_key,
+                base_url=self.base_url,
             )
         except Exception as e:
             raise Exception(f"Error calling LLM API: {str(e)}") from e
