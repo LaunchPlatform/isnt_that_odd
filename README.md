@@ -302,6 +302,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
+- **Inspired by** [vibesort](https://github.com/abyesilyurt/vibesort) - GPT-powered array sorting using structured output
 - Built with [LiteLLM](https://github.com/BerriAI/litellm) for universal LLM support
 - Uses [Pydantic](https://github.com/pydantic/pydantic) for data validation
 - Tested with [pytest](https://github.com/pytest-dev/pytest) and [promptfoo](https://github.com/promptfoo/promptfoo)
