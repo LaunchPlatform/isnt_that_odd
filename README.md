@@ -296,6 +296,22 @@ isnt_that_odd/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+## Releasing
+
+To release a new version:
+
+1. Update the version in `pyproject.toml`
+2. Create and push a version tag:
+   ```bash
+   git tag 0.1.1
+   git push origin 0.1.1
+   ```
+3. The GitHub Action will automatically:
+   - Build the package
+   - Publish to PyPI
+
+**Note:** Make sure to set the `PYPI_API_TOKEN` secret in your GitHub repository settings.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
