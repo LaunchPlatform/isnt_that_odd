@@ -209,38 +209,33 @@ class TestCLI:
 class TestLegacyMain:
     """Test the legacy main function for backward compatibility."""
 
-    @patch("isnt_that_odd.cli.is_even")
+    @patch("isnt_that_odd.core.is_even")
     def test_legacy_main_success(self, mock_is_even):
         """Test legacy main function still works."""
         from isnt_that_odd.cli import main
 
         mock_is_even.return_value = True
 
-        # Test that the main function calls check.callback correctly
-        # Since main is not a Click command, we test it differently
-        with patch("isnt_that_odd.cli.check") as mock_check:
-            main("42")
-            mock_check.callback.assert_called_once_with(
-                number="42",
-                model="gpt-3.5-turbo",
-                api_key=None,
-                base_url=None,
-                verbose=False,
-            )
+        # Test that the main function calls is_even correctly
+        main("42")
+        mock_is_even.assert_called_once_with(
+            number=42,
+            model="gpt-3.5-turbo",
+            api_key=None,
+            base_url=None,
+        )
 
-    @patch("isnt_that_odd.cli.is_even")
+    @patch("isnt_that_odd.core.is_even")
     def test_legacy_main_with_options(self, mock_is_even):
         """Test legacy main function with custom options."""
         from isnt_that_odd.cli import main
 
         mock_is_even.return_value = True
 
-        with patch("isnt_that_odd.cli.check") as mock_check:
-            main("42", model="gpt-4", api_key="test-key", verbose=True)
-            mock_check.callback.assert_called_once_with(
-                number="42",
-                model="gpt-4",
-                api_key="test-key",
-                base_url=None,
-                verbose=True,
-            )
+        main("42", model="gpt-4", api_key="test-key", verbose=True)
+        mock_is_even.assert_called_once_with(
+            number=42,
+            model="gpt-4",
+            api_key="test-key",
+            base_url=None,
+        )
