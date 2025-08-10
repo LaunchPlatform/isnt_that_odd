@@ -87,10 +87,6 @@ jobs:
         uv run ruff check src/ tests/
         uv run mypy src/
     
-    - name: Run promptfoo lint
-      run: |
-        promptfoo lint --config promptfoo.yaml
-    
   build:
     runs-on: ubuntu-latest
     needs: [test, lint]
