@@ -3,6 +3,8 @@ name: CI
 on:
   push:
     branches: [ master, develop ]
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'  # Triggers on version tags like 0.1.0, 1.2.3, etc.
   pull_request:
     branches: [ master, develop ]
 

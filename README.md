@@ -307,8 +307,10 @@ To release a new version:
    git push origin 0.1.1
    ```
 3. The GitHub Action will automatically:
+   - Run all tests across Python versions (3.8-3.12)
+   - Run linting and type checking
    - Build the package
-   - Publish to PyPI
+   - Publish to PyPI (only if all checks pass)
 
 **Note:** Make sure to set the `PYPI_API_TOKEN` secret in your GitHub repository settings.
 
