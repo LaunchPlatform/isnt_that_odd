@@ -2,6 +2,10 @@
 import random
 import sys
 import time
+from typing import Any
+from typing import Dict
+from typing import List
+from typing import Optional
 from typing import Union
 
 import click
@@ -25,7 +29,7 @@ def parse_number(value: str) -> Union[int, float, str]:
 
 def generate_random_numbers(
     count: int, min_val: int = -1000, max_val: int = 1000
-) -> list[int]:
+) -> List[int]:
     """Generate a list of random integers for benchmarking."""
     return [random.randint(min_val, max_val) for _ in range(count)]
 
@@ -33,8 +37,8 @@ def generate_random_numbers(
 def run_benchmark(
     count: int,
     model: str,
-    api_key: str,
-    base_url: str,
+    api_key: Optional[str],
+    base_url: Optional[str],
     verbose: bool,
     min_val: int,
     max_val: int,
@@ -50,8 +54,8 @@ def run_benchmark(
 
     # Track results
     correct_count = 0
-    total_time = 0
-    results = []
+    total_time = 0.0
+    results: List[Dict[str, Any]] = []
 
     for i, number in enumerate(numbers, 1):
         start_time = time.time()
@@ -156,7 +160,7 @@ def run_benchmark(
 
 @click.group()
 @click.version_option(version="0.1.0", prog_name="isnt-that-odd")
-def cli():
+def cli() -> None:
     """Check if numbers are even using LLM APIs."""
     pass
 
@@ -191,8 +195,8 @@ def cli():
 def check(
     number: str,
     model: str,
-    api_key: str,
-    base_url: str,
+    api_key: Optional[str],
+    base_url: Optional[str],
     verbose: bool,
 ) -> None:
     """Check if a single number is even using LLM APIs."""
@@ -280,8 +284,8 @@ def benchmark(
     min: int,
     max: int,
     model: str,
-    api_key: str,
-    base_url: str,
+    api_key: Optional[str],
+    base_url: Optional[str],
     verbose: bool,
 ) -> None:
     """Run benchmark mode with random numbers to test even/odd detection accuracy."""
@@ -320,18 +324,28 @@ def benchmark(
 def main(
     number: str,
     model: str = "gpt-3.5-turbo",
-    api_key: str = None,
-    base_url: str = None,
+    api_key: Optional[str] = None,
+    base_url: Optional[str] = None,
     verbose: bool = False,
 ) -> None:
     """Check if a number is even using LLM APIs (legacy function)."""
-    check.callback(
-        number=number,
-        model=model,
-        api_key=api_key,
-        base_url=base_url,
-        verbose=verbose,
-    )
+    from .core import is_even
+
+    try:
+        result = is_even(
+            number=parse_number(number),
+            model=model,
+            api_key=api_key,
+            base_url=base_url,
+        )
+
+        if result:
+            click.echo(f"✅ {number} is EVEN")
+        else:
+            click.echo(f"❌ {number} is ODD")
+    except Exception as e:
+        click.echo(f"❌ Error: {e}", err=True)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
