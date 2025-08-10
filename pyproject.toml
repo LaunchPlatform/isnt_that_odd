@@ -66,8 +66,8 @@ disallow_untyped_defs = true
 [tool.ruff]
 target-version = "py38"
 line-length = 88
-select = ["E", "F", "I", "N", "W", "B", "C4", "UP"]
-ignore = ["E501", "B008"]
+lint.select = ["E", "F", "I", "N", "W", "B", "C4", "UP"]
+lint.ignore = ["E501", "B008"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -4,7 +4,6 @@ import sys
 from typing import List
 from typing import Union
 
-from .core import EvenChecker
 from .core import is_even
 
 

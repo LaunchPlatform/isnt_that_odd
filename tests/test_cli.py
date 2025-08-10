@@ -1,8 +1,5 @@
 """Tests for the CLI functionality."""
-from unittest.mock import Mock
 from unittest.mock import patch
-
-import pytest
 
 from src.isnt_that_odd.cli import main
 from src.isnt_that_odd.cli import parse_number

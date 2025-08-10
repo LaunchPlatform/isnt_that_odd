@@ -1,5 +1,4 @@
 """Core functionality for determining if numbers are even using LLM APIs."""
-import json
 from typing import Optional
 from typing import Union
 

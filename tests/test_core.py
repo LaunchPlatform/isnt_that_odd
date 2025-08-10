@@ -1,5 +1,4 @@
 """Tests for the core functionality of isnt_that_odd."""
-from unittest.mock import MagicMock
 from unittest.mock import Mock
 from unittest.mock import patch
 
@@ -27,7 +26,7 @@ class TestEvenResponse:
         EvenResponse(is_even=True)
 
         # This should raise an error
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             EvenResponse(is_even="not a boolean")
 
 
