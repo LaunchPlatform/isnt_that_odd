@@ -1,8 +1,10 @@
 """Tests for the core functionality of isnt_that_odd."""
+
 from unittest.mock import Mock
 from unittest.mock import patch
 
 import pytest
+
 from isnt_that_odd.core import EvenChecker
 from isnt_that_odd.core import EvenResponse
 from isnt_that_odd.core import is_even

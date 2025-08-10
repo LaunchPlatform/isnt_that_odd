@@ -70,6 +70,9 @@ line-length = 88
 lint.select = ["E", "F", "I", "N", "W", "B", "C4", "UP"]
 lint.ignore = ["E501", "B008", "I001"]
 
+[tool.ruff.lint.isort]
+force-single-line = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]

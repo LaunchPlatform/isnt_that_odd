@@ -1,4 +1,5 @@
 """Command-line interface for the isn't that odd library."""
+
 import random
 import sys
 import time
