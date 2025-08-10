@@ -59,6 +59,8 @@ jobs:
     - name: Run promptfoo tests
       run: |
         promptfoo eval --config promptfoo.yaml
+      env:
+        XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
 
   lint:
     runs-on: ubuntu-latest
