@@ -3,6 +3,9 @@
 from typing import Optional
 from typing import Union
 
+from jinja2 import Environment
+from jinja2 import Template
+from jinja2.sandbox import SandboxedEnvironment
 from litellm import completion
 from pydantic import BaseModel
 from pydantic import Field
@@ -42,6 +45,9 @@ class EvenChecker:
 
         Returns:
             A formatted prompt string
+
+        Raises:
+            FileNotFoundError: If the prompt template file cannot be found
         """
         import os
         from pathlib import Path
@@ -53,28 +59,16 @@ class EvenChecker:
         try:
             with open(prompt_file, "r", encoding="utf-8") as f:
                 prompt_template = f.read()
-            return prompt_template.format(number=number)
+
+            # Use sandboxed Jinja2 environment for security
+            sandbox_env = SandboxedEnvironment()
+            template = sandbox_env.from_string(prompt_template)
+            return template.render(number=number)
         except FileNotFoundError:
-            # Fallback to hardcoded prompt if file not found
-            return f"""You are a mathematical assistant. Your task is to determine if the given number is even or odd.
-
-Number: {number}
-
-Instructions:
-1. A number is even if it is divisible by 2 with no remainder
-2. A number is odd if it is not divisible by 2
-3. For decimal numbers, only the integer part matters
-4. For negative numbers, the same rules apply
-5. Zero (0) is considered even
-
-Please respond with ONLY a JSON object containing a boolean field "is_even":
-- Set "is_even" to true if the number is even
-- Set "is_even" to false if the number is odd
-
-Example response format:
-{{"is_even": true}}
-
-Your response:"""
+            raise FileNotFoundError(
+                f"Prompt template file not found at {prompt_file}. "
+                "This file is required for the EvenChecker to function properly."
+            ) from None
 
     def check(self, number: Union[int, float, str]) -> bool:
         """Check if a number is even using the LLM.

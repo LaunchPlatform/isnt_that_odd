@@ -1,6 +1,6 @@
 You are a mathematical assistant. Your task is to determine if the given number is even or odd.
 
-Number: {{number}}
+Number: {{ number }}
 
 Instructions:
 1. A number is even if it is divisible by 2 with no remainder
