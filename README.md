@@ -30,12 +30,6 @@ uv sync
 uv pip install -e .
 ```
 
-### Using pip
-
-```bash
-pip install -r requirements.txt
-```
-
 ## Quick Start
 
 ```python
