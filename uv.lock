@@ -668,6 +668,7 @@ name = "isnt-that-odd"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "click" },
     { name = "litellm" },
     { name = "pydantic" },
 ]
@@ -684,6 +685,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "click", specifier = ">=8.0.0" },
     { name = "litellm", specifier = ">=1.0.0" },
     { name = "pydantic", specifier = ">=2.0.0" },
 ]

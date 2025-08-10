@@ -12,10 +12,10 @@ def main():
     print("=" * 50)
 
     # Check if you have an API key set
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("LITELLM_API_KEY")
     if not api_key:
-        print("⚠️  No OPENAI_API_KEY found in environment variables.")
-        print("   Set OPENAI_API_KEY to test with real LLM API calls.")
+        print("⚠️  No LITELLM_API_KEY found in environment variables.")
+        print("   Set LITELLM_API_KEY to test with real LLM API calls.")
         print("   For demonstration, we'll show the structure without API calls.\n")
 
     # Test numbers
@@ -49,7 +49,7 @@ def main():
         print("Try different models:")
 
         # Example with different models
-        models = ["gpt-3.5-turbo", "gpt-4"]
+        models = ["gpt-3.5-turbo", "gpt-4", "claude-3-sonnet", "llama-2-7b"]
         for model in models:
             try:
                 checker = EvenChecker(model=model)
@@ -58,8 +58,8 @@ def main():
             except Exception as e:
                 print(f"   {model}: Error - {e}")
     else:
-        print("🔑 Set OPENAI_API_KEY to test with real LLM API calls!")
-        print("   export OPENAI_API_KEY='your-api-key-here'")
+        print("🔑 Set LITELLM_API_KEY to test with real LLM API calls!")
+        print("   export LITELLM_API_KEY='your-api-key-here'")
 
     print("\n📚 For more examples, check the README.md file!")
 

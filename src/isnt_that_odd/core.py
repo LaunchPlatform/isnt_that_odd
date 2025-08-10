@@ -18,7 +18,7 @@ class EvenChecker:
 
     def __init__(
         self,
-        model: str = "gpt-3.5-turbo",
+        model: str = "gpt-3.5-turbo",  # Default model, can be any LiteLLM supported model
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
     ):
@@ -33,16 +33,19 @@ class EvenChecker:
         self.api_key = api_key
         self.base_url = base_url
 
-        # Set environment variables for LiteLLM
+        # Set environment variables for LiteLLM if provided
+        # Using generic environment variable names to avoid provider-specific assumptions
         if api_key:
             import os
 
-            os.environ["OPENAI_API_KEY"] = api_key
+            # Use a generic API key environment variable
+            os.environ["LITELLM_API_KEY"] = api_key
 
         if base_url:
             import os
 
-            os.environ["OPENAI_API_BASE"] = base_url
+            # Use a generic base URL environment variable
+            os.environ["LITELLM_API_BASE"] = base_url
 
     def _create_prompt(self, number: Union[int, float, str]) -> str:
         """Create a prompt for the LLM to determine if a number is even.
@@ -124,7 +127,7 @@ Your response:"""
 
 def is_even(
     number: Union[int, float, str],
-    model: str = "gpt-3.5-turbo",
+    model: str = "gpt-3.5-turbo",  # Default model, can be any LiteLLM supported model
     api_key: Optional[str] = None,
     base_url: Optional[str] = None,
 ) -> bool:

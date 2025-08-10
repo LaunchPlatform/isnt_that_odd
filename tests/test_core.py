@@ -3,10 +3,9 @@ from unittest.mock import Mock
 from unittest.mock import patch
 
 import pytest
-
-from src.isnt_that_odd.core import EvenChecker
-from src.isnt_that_odd.core import EvenResponse
-from src.isnt_that_odd.core import is_even
+from isnt_that_odd.core import EvenChecker
+from isnt_that_odd.core import EvenResponse
+from isnt_that_odd.core import is_even
 
 
 class TestEvenResponse:
@@ -60,7 +59,7 @@ class TestEvenChecker:
         assert "json" in prompt.lower()
         assert "is_even" in prompt
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_even_number_success(self, mock_completion):
         """Test successful check for even number."""
         # Mock the LLM response
@@ -75,7 +74,7 @@ class TestEvenChecker:
         assert result is True
         mock_completion.assert_called_once()
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_odd_number_success(self, mock_completion):
         """Test successful check for odd number."""
         # Mock the LLM response
@@ -90,7 +89,7 @@ class TestEvenChecker:
         assert result is False
         mock_completion.assert_called_once()
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_with_fallback_parsing(self, mock_completion):
         """Test fallback parsing when JSON parsing fails."""
         # Mock the LLM response with text instead of JSON
@@ -104,7 +103,7 @@ class TestEvenChecker:
 
         assert result is True
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_with_odd_fallback_parsing(self, mock_completion):
         """Test fallback parsing for odd numbers."""
         # Mock the LLM response with text instead of JSON
@@ -118,7 +117,7 @@ class TestEvenChecker:
 
         assert result is False
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_api_error(self, mock_completion):
         """Test handling of API errors."""
         mock_completion.side_effect = Exception("API Error")
@@ -127,7 +126,7 @@ class TestEvenChecker:
         with pytest.raises(Exception, match="Error calling LLM API"):
             checker.check(42)
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_unparseable_response(self, mock_completion):
         """Test handling of unparseable responses."""
         # Mock the LLM response with gibberish
@@ -140,7 +139,7 @@ class TestEvenChecker:
         with pytest.raises(ValueError, match="Could not parse LLM response"):
             checker.check(42)
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_ambiguous_response(self, mock_completion):
         """Test handling of ambiguous responses containing both true/false or even/odd."""
         # Mock the LLM response with ambiguous content
@@ -157,7 +156,7 @@ class TestEvenChecker:
         ):
             checker.check(42)
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_ambiguous_response_odd_even(self, mock_completion):
         """Test handling of ambiguous responses containing both odd and even indicators."""
         # Mock the LLM response with ambiguous content
@@ -172,7 +171,7 @@ class TestEvenChecker:
         ):
             checker.check(42)
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_check_calls_completion_correctly(self, mock_completion):
         """Test that completion is called with correct parameters."""
         mock_response = Mock()
@@ -202,7 +201,7 @@ class TestEvenChecker:
 class TestIsEvenFunction:
     """Test the convenience is_even function."""
 
-    @patch("src.isnt_that_odd.core.EvenChecker")
+    @patch("isnt_that_odd.core.EvenChecker")
     def test_is_even_calls_checker(self, mock_checker_class):
         """Test that is_even function creates checker and calls check method."""
         mock_checker = Mock()
@@ -226,7 +225,7 @@ class TestIsEvenFunction:
 class TestEdgeCases:
     """Test edge cases and special numbers."""
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_zero_is_even(self, mock_completion):
         """Test that zero is correctly identified as even."""
         mock_response = Mock()
@@ -239,7 +238,7 @@ class TestEdgeCases:
 
         assert result is True
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_negative_numbers(self, mock_completion):
         """Test negative numbers."""
         mock_response = Mock()
@@ -252,7 +251,7 @@ class TestEdgeCases:
 
         assert result is False
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_decimal_numbers(self, mock_completion):
         """Test decimal numbers."""
         mock_response = Mock()
@@ -265,7 +264,7 @@ class TestEdgeCases:
 
         assert result is True
 
-    @patch("src.isnt_that_odd.core.completion")
+    @patch("isnt_that_odd.core.completion")
     def test_string_numbers(self, mock_completion):
         """Test string representations of numbers."""
         mock_response = Mock()
