@@ -21,7 +21,7 @@ def parse_number(value: str) -> Union[int, float, str]:
         return value
 
 
-def main(args: List[str] = None) -> int:
+def main(args: Optional[List[str]] = None) -> int:
     """Main CLI function."""
     parser = argparse.ArgumentParser(
         description="Check if numbers are even using LLM APIs",
