@@ -146,7 +146,7 @@ def run_benchmark(
         r for r in results if not r["correct"] and r["predicted"] is not None
     ]
     if incorrect_results and verbose:
-        click.echo(f"\n❌ Examples of incorrect predictions:")
+        click.echo("\n❌ Examples of incorrect predictions:")
         for r in incorrect_results[:5]:  # Show first 5
             click.echo(
                 f"   {r['number']}: Predicted {'EVEN' if r['predicted'] else 'ODD'}, "

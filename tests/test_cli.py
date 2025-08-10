@@ -2,7 +2,6 @@
 from unittest.mock import patch
 
 from click.testing import CliRunner
-from isnt_that_odd.cli import check
 from isnt_that_odd.cli import cli
 from isnt_that_odd.cli import parse_number
 
