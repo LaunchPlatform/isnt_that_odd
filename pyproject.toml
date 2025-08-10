@@ -48,7 +48,7 @@ Issues = "https://github.com/yourusername/isnt_that_odd/issues"
 packages = ["src/isnt_that_odd"]
 
 [project.scripts]
-isnt-that-odd = "isnt_that_odd.cli:main"
+isnt-that-odd = "isnt_that_odd.cli:cli"
 
 [tool.black]
 line-length = 88

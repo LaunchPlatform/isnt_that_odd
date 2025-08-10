@@ -45,6 +45,44 @@ print(result)  # False
 
 ## Usage
 
+### Command Line Interface
+
+The library provides a command-line interface with two main commands:
+
+#### Check a single number
+```bash
+# Basic usage
+isnt-that-odd check 42
+
+# With custom model
+isnt-that-odd check --model gpt-4 42
+
+# With verbose output
+isnt-that-odd check --verbose 42
+
+# With custom API key
+isnt-that-odd check --api-key YOUR_KEY 42
+```
+
+#### Run benchmark mode
+```bash
+# Run benchmark with 20 random numbers
+isnt-that-odd benchmark --count 20
+
+# Run benchmark with custom range and verbose output
+isnt-that-odd benchmark --count 50 --min -5000 --max 5000 --verbose
+
+# Run benchmark with specific model
+isnt-that-odd benchmark --count 100 --model claude-3-sonnet-20240229
+```
+
+The benchmark mode:
+- Generates random numbers within a specified range
+- Tests the LLM's accuracy in determining even/odd numbers
+- Provides detailed statistics including accuracy percentage and timing
+- Shows breakdown by even vs odd numbers
+- Reports examples of incorrect predictions (with verbose mode)
+
 ### Basic Usage
 
 ```python
@@ -129,6 +167,27 @@ Main class for checking if numbers are even.
 **Methods:**
 - `check(number)`: Check if a number is even
 - `_create_prompt(number)`: Create the prompt for the LLM
+
+### Benchmark Functions
+
+The CLI module also provides programmatic access to benchmark functionality:
+
+```python
+from isnt_that_odd.cli import run_benchmark, generate_random_numbers
+
+# Generate random numbers for testing
+numbers = generate_random_numbers(count=100, min_val=-1000, max_val=1000)
+
+# Run benchmark programmatically
+run_benchmark(
+    count=50,
+    model="gpt-3.5-turbo",
+    api_key="your-key",
+    verbose=True,
+    min_val=-500,
+    max_val=500
+)
+```
 
 ## How It Works
 
@@ -215,13 +274,16 @@ isnt_that_odd/
 ├── src/
 │   └── isnt_that_odd/
 │       ├── __init__.py
-│       └── core.py
+│       ├── core.py
+│       └── cli.py
+├── examples/
+│   ├── basic_usage.py
+│   └── benchmark_example.py
 ├── tests/
 │   ├── __init__.py
-│   └── test_core.py
+│   ├── test_core.py
+│   └── test_cli.py
 ├── pyproject.toml
-├── requirements.txt
-├── requirements-dev.txt
 ├── promptfoo.yaml
 └── README.md
 ```
