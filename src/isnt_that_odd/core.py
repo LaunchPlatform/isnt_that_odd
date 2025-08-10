@@ -3,8 +3,6 @@
 from typing import Optional
 from typing import Union
 
-from jinja2 import Environment
-from jinja2 import Template
 from jinja2.sandbox import SandboxedEnvironment
 from litellm import completion
 from pydantic import BaseModel
@@ -49,7 +47,6 @@ class EvenChecker:
         Raises:
             FileNotFoundError: If the prompt template file cannot be found
         """
-        import os
         from pathlib import Path
 
         # Get the directory where this module is located
@@ -57,7 +54,7 @@ class EvenChecker:
         prompt_file = current_dir / "prompts" / "even_odd.txt"
 
         try:
-            with open(prompt_file, "r", encoding="utf-8") as f:
+            with open(prompt_file, encoding="utf-8") as f:
                 prompt_template = f.read()
 
             # Use sandboxed Jinja2 environment for security
