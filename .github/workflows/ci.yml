@@ -43,6 +43,7 @@ jobs:
         fail_ci_if_error: false
 
   promptfoo:
+    environment: CI
     runs-on: ubuntu-latest
     
     steps:
